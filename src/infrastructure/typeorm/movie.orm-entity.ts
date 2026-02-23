@@ -1,29 +1,37 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryColumn, Column, CreateDateColumn } from 'typeorm';
 import { MovieGenre } from '../../domain/movie';
+
 
 @Entity('movies')
 export class MovieOrmEntity {
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryColumn('uuid')
     id: string;
+
 
     @Column({ length: 120 })
     title: string;
 
-    @Column({ type: 'text', nullable: true })
-    description: string | null;
 
-    @Column({ name: 'release_year' })
+    @Column({ type: 'text', nullable: true })
+    description: string;
+
+
+    @Column({ type: 'int' })
     releaseYear: number;
 
-    @Column({
-        type: 'enum',
-        enum: MovieGenre,
-    })
+
+    @Column({ type: 'enum', enum: MovieGenre })
     genre: MovieGenre;
+
 
     @Column({ default: false })
     watched: boolean;
 
+
     @Column({ type: 'int', nullable: true })
-    rating: number | null;
+    rating: number;
+
+
+    @CreateDateColumn()
+    createdAt: Date;
 }
