@@ -1,20 +1,27 @@
-export class InvalidTitleError extends Error {
-    constructor() {
-        super('Movie title must be between 2 and 120 characters');
-        this.name = 'InvalidTitleError';
+export class DomainError extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = 'DomainError';
     }
 }
 
-export class InvalidYearError extends Error {
+
+export class InvalidTitleError extends DomainError {
     constructor() {
-        super('Movie release year must be between 1888 and 2100');
-        this.name = 'InvalidYearError';
+        super('Title must be between 2 and 120 characters');
     }
 }
 
-export class InvalidRatingError extends Error {
+
+export class InvalidYearError extends DomainError {
     constructor() {
-        super('Movie rating must be between 1 and 5');
-        this.name = 'InvalidRatingError';
+        super('Invalid release year (must be between 1888 and 2100)');
+    }
+}
+
+
+export class InvalidRatingError extends DomainError {
+    constructor() {
+        super('Rating must be between 1 and 5');
     }
 }
