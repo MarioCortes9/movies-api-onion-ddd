@@ -1,5 +1,6 @@
+import { Injectable, Inject } from '@nestjs/common';
 import { Movie, MovieGenre } from '../../domain/movie';
-import { MovieRepositoryPort } from '../ports/movie-repository.port';
+import { MovieRepositoryPort } from '../ports/movie.repository';
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -12,8 +13,11 @@ export interface CreateMovieCommand {
 }
 
 
+@Injectable()
 export class CreateMovieUseCase {
-    constructor(private readonly movieRepository: MovieRepositoryPort) { }
+    constructor(
+        private readonly movieRepository: MovieRepositoryPort
+    ) { }
 
 
     async execute(command: CreateMovieCommand): Promise<string> {
